@@ -3,7 +3,13 @@
         @if (session()->has('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
         @endif
-        <livewire:contact.contact-create></livewire:contact.contact-create>
+
+        @if ($statusUpdate)
+            <livewire:contact.contact-update></livewire:contact.contact-update>
+        @else
+            <livewire:contact.contact-create></livewire:contact.contact-create>
+        @endif
+
         <hr>
         <table class="table">
             <thead class="thead-dark">
@@ -23,7 +29,7 @@
                         <td>{{ $contact->name }}</td>
                         <td>{{ $contact->phone }}</td>
                         <td>
-                            <button class="btn btn-info text-white btn-sm">Edit</button>
+                            <button wire:click="getContact({{$contact->id}})" class="btn btn-info text-white btn-sm">Edit</button>
                             <button class="btn btn-danger text-white btn-sm">Delete</button>
                         </td>
                     </tr>
